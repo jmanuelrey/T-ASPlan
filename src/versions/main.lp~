@@ -1,0 +1,43 @@
+# AUTHOR: Juan Manuel Rey Escobar
+
+#script(python)
+
+import clingo
+
+
+def feasible(list):
+    for element in list:
+        if "0" in str(element): list.remove(element)
+        
+        
+def main(prg):
+    #problem = str(input('Problem instance: '))
+    # We ask for all stable models
+    prg.configuration.solve.models = 0
+
+    # We load our logical program.
+    prg.load("loadprogram.lp")
+
+    # Grounding is done just once.
+    prg.ground([("load",[1])])
+
+    # We use a list of lists for the stable models
+    stableModels = []
+
+
+
+    with prg.solve(yield_ = True) as iterator:
+        for element in iterator: 
+            atoms = []
+            for atom in element.symbols(atoms = True):
+                atoms.append(atom)
+            feasible(atoms)
+            stableModels.append(atoms)      
+            print(iterator.get())
+        
+        print('Stable Models:' + str(len(stableModels)))
+        print(stableModels)
+                      
+#end.
+
+
