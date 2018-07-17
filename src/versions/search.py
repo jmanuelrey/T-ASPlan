@@ -15,10 +15,6 @@ class Search:
         fringe.insert(root)
         return fringe
 
-    """ Returns TRUE if fringe is empty """
-    def fringeIsEmpty(fringe):
-        return (fringe.currentSize == 0)
-
     """ POP method """
     def fringePOP(fringe):
         return fringe.delMin()
@@ -30,27 +26,27 @@ class Search:
 
     
     """ Expands a node """
-    def inPath(node, state):
-        while (node != None):
-            if(
+    
 
     """ Prints the solution """
 
     
-    """ Search algorithms """
+    """ Search algorithm """
     def graphSearch():
         closed = {}
         rootNode = searchNode(initialState, None, None, 0, 0)
         fringe = self.newFringe(root)
         
         while 1:
-        if (fringeIsEmpty(fringe)): return 0
+        if (fringe.isEmpty): return 0
         node = self.fringePOP(fringe)
 
         if(goalTest(node.state)):
             printSolution(node)
             return 1
-
+        if(node.state) not in closed:
+            closed[key] = node.state
+            fringe.insert(expand(node))
         
 
 

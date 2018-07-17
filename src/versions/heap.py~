@@ -2,7 +2,7 @@
 
 class BinaryHeap:
     # Creates a binary heap
-    def __init__(self, heapList):
+    def __init__(self):
         self.heapList = [0]
         self.currentSize = 0
 

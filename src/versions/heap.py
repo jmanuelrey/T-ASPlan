@@ -51,5 +51,9 @@ class BinaryHeap:
         self.heapList.pop()
         self.percDown(1)
         return retval
+
+    """ Returns TRUE is heap is empty """
+    def isEmpty(self):
+        return (self.currentSize == 0)
                
         
