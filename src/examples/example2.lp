@@ -13,9 +13,9 @@ def feasible(list):
 def returnAction(action):
     if "action" in action: return action[7:-1]
 
-def actionCompare(action, key):
+def clean(action):
     index = action.find("(")
-    return (key == action[:index])
+    return action[:index]
 
         
 def main(prg):
@@ -30,7 +30,7 @@ def main(prg):
     prg.ground([("load",[1])])
 
     # We use a list of lists for the stable models
-    stableModels = []
+    states = []
 
     actionList = []
 
@@ -48,16 +48,18 @@ def main(prg):
             for atom in element.symbols(atoms = True):  
                 if "action" not in str(atom):
                     for key in keys:
-                        if (actionCompare(str(atom), key)): actions.append(atom)
-                        else: atoms.append(atom)
+                        if clean(str(atom)) == key: 
+                            actions.append(atom)
+                        else:   
+                            if atom not in atoms and clean(str(atom)) not in keys: atoms.append(atom)
 
             feasible(atoms)
             actionList.append(actions)
-            stableModels.append(atoms)      
+            states.append(atoms)      
             print(iterator.get())
         
-        print('Stable Models: ' + str(len(stableModels)))
-        print(stableModels)
+        print('States: ' + str(len(states)))
+        print(states)
         print(' Actions: ' + str(len(actionList)))
         print(actionList)
                       
