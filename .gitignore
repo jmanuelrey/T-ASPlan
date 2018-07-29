@@ -1,1 +1,6 @@
 *~
+
+# Eclipse specific gitignore
+*.metadata
+*.project
+*.pydevproject
