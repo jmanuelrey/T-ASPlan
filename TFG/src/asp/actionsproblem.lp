@@ -1,6 +1,14 @@
-#program load(t).
+#program config.
 
-action(load;shoot).
+action(load, 0).     action(shoot, 0).
+
+fluent(loaded, 0).   fluent(unloaded, 0).   fluent(dead, 0).
+
+fluent(loaded, 0).   fluent(alive, 0). 
+
+
+
+#program base(t).
 
 loaded(t) :- load(t), unloaded(t-1).
 
