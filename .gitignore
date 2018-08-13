@@ -4,3 +4,4 @@
 *.metadata
 *.project
 *.pydevproject
+*.pyc
