@@ -6,13 +6,13 @@
 import clingo
 
         
-def main(prg):
-    program = clingo.Control([])
+def main(program):
     program.configuration.solve.models = 0
     
     # We use a list of lists for the stable models
     states = []
 
+	# We use a list for store all atoms which correspond to actions
     action_list = []
     
     # We load our logical program.
@@ -36,17 +36,24 @@ def main(prg):
 	
     for model in stable_models:
 		atoms = []
+		actions = []
 		for atom in model.symbols(atoms = True):
 			if '0' not in str(atom):
 			    if (str(atom)[:-3]) not in action_list:
 			        atoms.append(str(atom)[:-3])
-		states.append(atoms)
-	
-    print('Actions: ' + str(len(action_list)))   
-    print(action_list)
+			    else:
+			    	actions.append(str(atom)[:-3])
+		states.append((atoms,actions))
     print('States: ' + str(len(states)))
-    print(states)
+    for fst,scd in states:
+    	print('State: ') ,
+    	print(fst) ,
+    	print('Action: ') ,
+    	print(scd)
 		
 
                       
 #end.
+
+program = clingo.Control([])
+main(program)

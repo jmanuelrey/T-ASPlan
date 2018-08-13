@@ -2,9 +2,9 @@
 
 action(load, 0).     action(shoot, 0).
 
-fluent(loaded, 0).   fluent(unloaded, 0).   fluent(dead, 0).
+fluent(loaded, 0).   fluent(unloaded, 0).   
 
-fluent(loaded, 0).   fluent(alive, 0). 
+fluent(alive, 0).    fluent(dead, 0).
 
 
 

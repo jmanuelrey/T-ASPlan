@@ -1,16 +1,16 @@
 # AUTHOR: Juan Manuel Rey Escobar
 
 
-class Hash:
+class HashTable:
     """ Creates a hash table structure """
     def __init__(self, size):
-        self.hash_table = [[] for _ in range(size)]
+        self.elements = [[] for _ in range(size)]
         
     """ Inserts a key-value pair in the hash table """
     def insert(self, key, value):
-        hash_key = hash(key) % len(self.hash_table)
+        key = hash(key) % len(self.elements)
         key_exists = False
-        bucket = self.hash_table[hash_key]
+        bucket = self.elements[key]
         
         for i, kv in enumerate(bucket):
             k, v = kv
@@ -25,9 +25,9 @@ class Hash:
             bucket.append((key, value))
             
     """ Searchs data from the hash table """
-    def search(self, key):
-        hash_key = hash(key) % len(self.hash_table)
-        bucket = self.hash_table[hash_key]
+    def search(self, element):
+        key = hash(element) % len(self.elements)
+        bucket = self.elements[key]
         
         for i, kv in enumerate(bucket):
             k, v = kv

@@ -3,7 +3,9 @@
 
 """ Script to obtain a list of stable models from a problem instance. """
 import clingo
-
+import sys
+sys.path.append('../')
+import main.model.datastructures.hash
 
 def feasible(list):
     for element in list:
