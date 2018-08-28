@@ -16,3 +16,6 @@ class FifoQueue(Fringe):
             return None
         else:
             return self.list.pop()
+        
+    def size(self):
+        return len(self.list)
