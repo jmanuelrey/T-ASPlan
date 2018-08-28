@@ -1,4 +1,4 @@
-#program config.
+#program types.
 
 action(load, 0).     action(shoot, 0).
 
@@ -8,7 +8,7 @@ fluent(alive, 0).    fluent(dead, 0).
 
 
 
-#program base(t).
+#program dynamic(t).
 
 loaded(t) :- load(t), unloaded(t-1).
 
@@ -33,8 +33,11 @@ unloaded(t) :- unloaded(t-1), not loaded(t).
 0 {load(t); shoot(t)} 1.
 
 
-
-% Init
+#program initial.
 
 alive(0).
 unloaded(0).
+
+#program final(t).
+
+goal(t-1) :- dead(t-1), loaded(t-1).

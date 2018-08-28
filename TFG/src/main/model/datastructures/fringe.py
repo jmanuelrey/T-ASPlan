@@ -1,6 +1,5 @@
 # AUTHOR: Juan Manuel Rey Escobar
 
-import abc
 from _pyio import __metaclass__
 from abc import ABCMeta
 from abc import abstractmethod
@@ -19,7 +18,13 @@ class Fringe(object):
         return
     
     """ Returns a boolean value """
+    @abstractmethod
     def is_empty(self):
+        return
+    
+    """ Returns a the number of elements stored in the fringe """
+    @abstractmethod
+    def size(self):
         return
         
     

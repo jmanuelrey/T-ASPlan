@@ -18,3 +18,6 @@ class PriorityQueue(Fringe):
         else:
             return heapq.heappop(self.list)
         
+    def size(self):
+        return len(self.list)
+        
