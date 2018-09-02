@@ -1,8 +1,7 @@
 #AUTHOR: Juan Manuel Rey Escobar
-import heapq 
 from fringe import Fringe
 
-class PriorityQueue(Fringe):
+class LifoQueue(Fringe):
     def __init__(self):
         self.list = []
     
@@ -10,15 +9,13 @@ class PriorityQueue(Fringe):
         return len(self.list) == 0
     
     def push(self, element):
-        heapq.heappush(self.list, element)
-    
-    
+        self.list.append(element)
+        
     def pop(self):
         if self.is_empty():
             return None
         else:
-            return heapq.heappop(self.list)[1]
+            return self.list.pop()
         
     def size(self):
         return len(self.list)
-        

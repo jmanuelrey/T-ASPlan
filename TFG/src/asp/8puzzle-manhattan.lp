@@ -4,13 +4,16 @@ action(move(X,t)) :- dir(X).
 fluent(pos(X,Y,Z,t)) :- tile(X), row(Y), col(Z).
 fluent(goal(t)).
 
-
 #program static.
 
 row(1..3).
 col(1..3).
 tile(0..8).
 cell(X,Y) :- row(X), col(Y).
+
+goalpos(1,1,1), goalpos(2,1,2), goalpos(3,1,3),
+goalpos(4,2,1), goalpos(5,2,2), goalpos(6,2,3),
+goalpos(7,3,1), goalpos(8,3,2), goalpos(0,3,3).
 
 dir(up;down;right;left).
 
@@ -25,8 +28,10 @@ pos(1,1,1,0). pos(8,1,2,0). pos(2,1,3,0).
 pos(0,2,1,0). pos(4,2,2,0). pos(3,2,3,0).
 pos(7,3,1,0). pos(6,3,2,0). pos(5,3,3,0).
 
-
 #program dynamic(t).
+
+% Manhattan heuristic
+heuristics(N) :- #sum{M,F: tile(F), pos(F,X,Y,t), goalpos(F,X2,Y2), M=|X-X2|+|Y-Y2|}=N.
 
 1 {move(D,t) : dir(D)} 1.
 

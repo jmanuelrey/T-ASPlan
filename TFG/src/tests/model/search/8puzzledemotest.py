@@ -1,13 +1,13 @@
 #script(python)
 
 import time
-from src.main.model.datastructures import priorityqueue
-from src.main.model.datastructures import fifoqueue
-from src.main.model.datastructures import lifoqueue
-from src.main.model.search.searchnode import SearchNode
+from TFG.src.main.model.datastructures import priorityqueue
+from TFG.src.main.model.datastructures import fifoqueue
+from TFG.src.main.model.datastructures import lifoqueue
+from TFG.src.main.model.search.searchnode import SearchNode
 from memory_profiler import memory_usage
 
-s0 = (1,8,2,9,4,3,7,6,5)
+s0 = (8,1,2,9,4,3,7,6,5)
 sf = (1,2,3,4,5,6,7,8,9)
 N = 3
 fringe = fifoqueue.FifoQueue()

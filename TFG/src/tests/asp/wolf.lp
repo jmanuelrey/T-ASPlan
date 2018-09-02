@@ -7,8 +7,8 @@ fluent(goal(t)).
 
 #program initial.
 
-at(wolf,left,0). at(sheep,left,0). at(cabbage,left,0). 
-boat(left,0). 
+at(wolf,right,0). at(sheep,left,0). at(cabbage,left,0). 
+boat(right,0). 
 
 #program static.
 
