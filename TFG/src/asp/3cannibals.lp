@@ -4,7 +4,6 @@ action(move(X,Y,t))  :- numpair(X,Y).
 fluent(moved(G,N,t)) :- group(G), number(N).
 fluent(num(G,B,N,t)) :- group(G), bank(B), number(N).
 fluent(boat(B,t))    :- bank(B).
-fluent(ab(G,B,N,t))  :- group(G), bank(B), number(N).
 fluent(goal(t)).
 
 
@@ -48,12 +47,10 @@ num(G,B,M-N,t) :- num(G,B,M,t-1), boat(B,t-1), moved(G,N,t).
 boat(B1,t) :- boat(B2,t-1), opp(B2,B1).
 
 % The number of cannibals cannot surpass the number of misionaries in a bank.
-:- num(mis,B,M,t), num(can,B,C,t), C>M, M>0.
+:- num(mis,B1,M,t), num(can,B2,C,t), C>M, M>0, B1==B2.
 
 % Inertia rules.
 num(G,B,N,t) :- num(G,B,N,t-1), moved(G,0,t).
-
-boat(B1,t) :- boat(B1,t-1), opp(B1,B2), not boat(B2,t).
 
 :- num(G,B,N,t), num(G,B,M,t), M!=N.
 :- boat(left,t), boat(right,t).

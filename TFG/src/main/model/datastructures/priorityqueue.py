@@ -10,7 +10,7 @@ class PriorityQueue(Fringe):
         return len(self.list) == 0
     
     def push(self, element):
-        heapq.heappush(self.list, element)
+        heapq.heappush(self.list, (element.priority, element))
     
     
     def pop(self):

@@ -7,10 +7,12 @@ import TFG.src.main.model.util.atomutils
 
 
 class Solver():
-    def __init__(self, file_name, search_algorithm, fringe):
+    def __init__(self, file_name, search_algorithm, fringe, heuristic, bfs):
         self.file_name = file_name
         self.fringe = fringe
         self.search_algorithm = search_algorithm
+        self.heuristic = heuristic
+        self.bfs = bfs
     
     def solve(self):
         """ Creating the program object """
@@ -35,13 +37,13 @@ class Solver():
         try:
             program_dynamic.load(self.file_name)
         except RuntimeError:
-            return 
+            raise RuntimeError 
         
         """ We obtain fluents, actions and the initial state """
         try:
             program_types.ground([('initial', []), ('types', [0]), ('static', [])])  
         except RuntimeError:
-            return 
+            raise RuntimeError
         
         models = program_types.solve(yield_ = True)
         for element in models:
@@ -69,9 +71,9 @@ class Solver():
             program_dynamic.ground([('fluents', []), ('actions', []), ('dynamic', [1]), ('static', []), ('final',[1])])
         
         except RuntimeError:
-            return 
+            raise RuntimeError
         
         """ Delegates to its search algorithm """
         self.search_algorithm.add_domain(program_dynamic)
-        self.search_algorithm.search(initial_states[0],self.fringe,action_list,fluent_list)
+        self.search_algorithm.search(initial_states[0],self.fringe,action_list,fluent_list, self.heuristic, self.bfs)
 

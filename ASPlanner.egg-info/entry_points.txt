@@ -1,0 +1,3 @@
+[console_scripts]
+asplanner = TFG.__main__:main
+

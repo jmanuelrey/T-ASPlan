@@ -2,6 +2,12 @@ LICENSE
 MANIFEST.in
 README.md
 setup.py
+ASPlanner.egg-info/PKG-INFO
+ASPlanner.egg-info/SOURCES.txt
+ASPlanner.egg-info/dependency_links.txt
+ASPlanner.egg-info/entry_points.txt
+ASPlanner.egg-info/not-zip-safe
+ASPlanner.egg-info/top_level.txt
 TFG/__init__.py
 TFG/__main__.py
 TFG/src/__init__.py
@@ -38,9 +44,3 @@ TFG/src/tests/model/datastructures/fifoqueuetest.py
 TFG/src/tests/model/datastructures/lifoqueuetest.py
 TFG/src/tests/model/datastructures/priorityqueuetest.py
 TFG/src/tests/model/search/8puzzledemotest.py
-tfg.egg-info/PKG-INFO
-tfg.egg-info/SOURCES.txt
-tfg.egg-info/dependency_links.txt
-tfg.egg-info/entry_points.txt
-tfg.egg-info/not-zip-safe
-tfg.egg-info/top_level.txt

@@ -3,5 +3,5 @@ projectKey=jmanuelrey_TFG
 serverUrl=https://sonarcloud.io
 serverVersion=7.4.0.16105
 dashboardUrl=https://sonarcloud.io/dashboard?id=jmanuelrey_TFG
-ceTaskId=AWWVy5R7QN8MmxfNEFNz
-ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AWWVy5R7QN8MmxfNEFNz
+ceTaskId=AWWbJPB0QN8MmxfNEGPT
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AWWbJPB0QN8MmxfNEGPT

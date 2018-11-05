@@ -46,6 +46,28 @@ def print_solution(node):
         print('\n')
 
         
+""" Return solution size """
+
+def get_solution_size(node): 
+        plan = []
+        while node.parent != None:
+            if len(node.action) == 0:
+                plan.insert(0, clingo.Function("no action"))
+            elif len(node.action) == 1:
+                plan.insert(0, clingo.Function(decorate_action(str(node.action[0]))))
+            else:
+                actions = ()
+                for action in node.action:
+                    actions.add(clingo.Function(decorate_action(str(action))))
+                plan.insert(0, actions)
+                
+            node = node.parent
+        i = 1
+        for action in plan:
+            i += 1
+        return i
+        
+        
 """ Resets the given atom to t=0 """     
 
 
@@ -65,6 +87,12 @@ def obtain_t(atom):
         items = new_atom.split(",")
         return items.pop() 
 
+def obtain_n(atom):
+        start = atom.find('(')
+        end = atom.find(')')
+        new_atom = atom[start + 1:end]
+        items = new_atom.split(",")
+        return items.pop(0) 
     
 """ Obtains the list of params of a given atom """
 

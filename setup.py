@@ -3,9 +3,10 @@
 #AUTHOR: Juan Manuel Rey Escobar
 
 import setuptools
+from TFG.src.main.model.util import mainutils
 
-setuptools.setup(name='tfg',
-      version= '1.0.0',
+setuptools.setup(name='ASPlanner',
+      version= mainutils.version,
       description='Complete planner to solve ASP logic programs',
       url='https://github.com/jmanuelrey/TFG',
       author='Juan Manuel Rey Escobar',
@@ -16,7 +17,7 @@ setuptools.setup(name='tfg',
       zip_safe=False,
       entry_points={
           'console_scripts':[
-              'tfg = TFG.__main__:main'
+              'asplanner = TFG.__main__:main'
            ]
        }
 )

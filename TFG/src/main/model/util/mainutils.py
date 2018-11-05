@@ -6,22 +6,23 @@ from TFG.src.main.model.search.graphsearch import GraphSearch
 """ Current version """
 version = "1.0.0"
 
-""" default parameters """
-fringe = FifoQueue()
-search_algorithm = GraphSearch()
-
-
 def print_help():
-    print('  usage: [options] [file]')
+    print('  usage: [file] [options] [search]')
     print('  Available options:')
     print('  -all: Searches for all possible plans.')
-    print('  -d: Depth search.')
-    print('  -b: Breadth search.')
-    print('  -h: Indicates the tool to use an heuristic given within the specification.')
-    print('  -help: Shows help menu')
+    print('  -h: Search with heuristic. The program specification must include an heuristic.')
+    print('  -help: Displays help menu')
     print('  --version: Current installed version')
+    print('  Available search algorithms:')
+    print('  breadth ')
+    print('  depth ')
+    print('  greedy ')
+    print('  astar ')
 
     
 def print_version():
     print(version)
+    
+def print_error():
+    print('ERROR: solving was not possible.')
     

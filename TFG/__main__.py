@@ -10,37 +10,85 @@ from TFG.src.main.model.search.graphsearch import GraphSearch
 from TFG.src.main.model.search.completegraphsearch import CompleteGraphSearch
 from TFG.src.main.model.util.mainutils import print_help
 from TFG.src.main.model.util.mainutils import print_version
-from TFG.src.main.model.util.mainutils import fringe
-from TFG.src.main.model.util.mainutils import search_algorithm
+from TFG.src.main.model.util.mainutils import print_error
+from asynchat import fifo
+from binstar_client.commands.search import search
 
 
 def main():
+    search_algorithm = GraphSearch()
+    fringe = FifoQueue()
+    bfs = "astar"
+    use_heuristic = False
     
     if len(sys.argv) == 2:
-        params = sys.argv[1]
-        if params == "--version":
+        param1 = sys.argv[1]
+        if param1 == "--version":
             print_version()
-        elif params == "-help":
+            return
+        elif param1 == "-help":
             print_help()
+            return
+                
+    if len(sys.argv) == 3:
+        param1 = sys.argv[1]
+        param2 = sys.argv[2]
+        if param2 == "-h":
+            use_heuristic = True
+        elif param2 == "-all":
+            search_algorithm = CompleteGraphSearch()
+        elif param2 == "breadth":
+            fringe = FifoQueue()
+        elif param2 == "depth":
+            fringe = LifoQueue()
+        elif param2 == "greedy":
+            fringe = PriorityQueue()
+            bfs = 'greedy'
+        elif param2 == "astar":
+            fringe = PriorityQueue()
         else:
-            plan = solver.Solver(params,search_algorithm,fringe)
-            plan.solve()
+            print_error()
+            print_help()
+            return
+            
+    elif len(sys.argv) == 4:
+        param1 = sys.argv[1]
+        param2 = sys.argv[2]
+        param3 = sys.argv[3]
         
-    else:
-        options = sys.argv[1]
-        file_name = sys.argv[2]
-        if options == "-all":
-            plan = solver.Solver(file_name,CompleteGraphSearch(),fringe)
-            plan.solve()
-        elif options == "-d":
-            plan = solver.Solver(file_name,search_algorithm,LifoQueue())
-            plan.solve()
-        elif options == "-b":
-            plan = solver.Solver(file_name,search_algorithm,FifoQueue())
-            plan.solve()
-        elif options == "-h":
-            plan = solver.Solver(file_name,search_algorithm,PriorityQueue())
-            plan.solve()
+        if param2 == "-h":
+            use_heuristic = True
+        elif param2 == "-all":
+            search_algorithm = CompleteGraphSearch()   
+        else:
+            print_error()
+            print_help()
+            return
+        
+        if param3 == "breadth":
+            fringe = FifoQueue()
+        elif param3 == "depth":
+            fringe = LifoQueue()
+        elif param3 == "greedy":
+            fringe = PriorityQueue()
+            bfs = 'greedy'
+        elif param3 == "astar":
+            fringe = PriorityQueue()
+        else:
+            print_error()
+            print_help()
+            return 
+        
+    plan = solver.Solver(param1,search_algorithm,fringe,use_heuristic,bfs)
+    try:
+        plan.solve()
+    except RuntimeError:
+        print_error()
+        print_help()
+        return 
+            
+        
+
             
         
 

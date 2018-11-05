@@ -10,13 +10,15 @@ from TFG.src.main.model.util.atomutils import print_solution
 
            
 class GraphSearch:
+    def __init__(self):
+        self.domain = None
 
     def add_domain(self,domain):
         self.domain = domain
-            
+        
     """ Searches for a plan """   
 
-    def search(self, initial, fringe, actions, fluents):
+    def search(self, initial, fringe, actions, fluents, use_heuristic, bfs):
         """ Fringe: data structure for storing search nodes """
         fringe = fringe
         """ Maximum number of nodes in the fringe """
@@ -26,7 +28,7 @@ class GraphSearch:
         """ Set of visited nodes """
         closed = set()
         """ Node which stores the initial state """
-        root_node = SearchNode(initial, None, [], 0, 0)
+        root_node = SearchNode(initial, None, [], 0, 0, 0)
         fringe.push(root_node)
         """ The goal predicate """
         goal = clingo.Function("goal", [0])
@@ -85,6 +87,6 @@ class GraphSearch:
             if frozenset(node.state) not in closed:
                 closed.add(frozenset(node.state))
                 explored = explored + 1
-                for child in expand(self.domain, node, actions, fluents):
+                for child in expand(self.domain, node, actions, fluents, use_heuristic, bfs):
                     fringe.push(child)
 
