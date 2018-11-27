@@ -17,6 +17,14 @@ TFG/src/asp/8puzzle-manhattan.lp
 TFG/src/asp/8puzzle.lp
 TFG/src/asp/__init__.py
 TFG/src/asp/wolf.lp
+TFG/src/benchmarks/8puzzle/8puzzle.lp
+TFG/src/benchmarks/8puzzle/8puzzle_planner.lp
+TFG/src/benchmarks/8puzzle_no_sol/8puzzle_planner.lp
+TFG/src/benchmarks/hanoi/hanoi.lp
+TFG/src/benchmarks/hanoi/hanoi_planner.lp
+TFG/src/benchmarks/hanoi_no_sol/hanoi_planner.lp
+TFG/src/benchmarks/wolf/wolf.lp
+TFG/src/benchmarks/wolf/wolf_planner.lp
 TFG/src/main/__init__.py
 TFG/src/main/model/__init__.py
 TFG/src/main/model/datastructures/__init__.py

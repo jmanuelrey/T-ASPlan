@@ -13,7 +13,7 @@ boat(left,0).
 #program static.
 
 bank(left;right). opp(left, right).    opp(right, left). 
-eats(wolf,sheep). eats(sheep,cabbage). item(wolf; sheep; cabbage).
+eats(wolf,sheep). eats(sheep,cabbage). item(wolf; sheep; cabbage). eats(wolf,cabbage).
 
 #program dynamic(t).
 

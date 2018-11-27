@@ -3,6 +3,16 @@
 
 import clingo
 
+""" Prepares a state for being printed """
+
+
+def pretify(state):
+    if state == 'goal(0)':
+        return 'goal'
+    else:
+        t = state.find('0')
+        return state[:t - 1] + ')'
+    
 """ Obtains a dynamic fluent without parameters """
 
 
@@ -27,7 +37,7 @@ def print_solution(node):
         plan = []
         while node.parent != None:
             if len(node.action) == 0:
-                plan.insert(0, clingo.Function("no action"))
+                plan.insert(0, clingo.Function("white"))
             elif len(node.action) == 1:
                 plan.insert(0, clingo.Function(decorate_action(str(node.action[0]))))
             else:
@@ -39,10 +49,27 @@ def print_solution(node):
             node = node.parent
         i = 1
         for action in plan:
-            print(str(i) + ': '),
+            print('Action'+ str(i) + ': '),
             print(action) ,
             print(' ') ,
+            print('\n')
             i += 1
+        print('\n')
+
+
+def print_solution_states(node): 
+        plan = []
+        while True:
+            plan.insert(0,node.state)
+            if node.parent != None:
+                node = node.parent  
+            else:
+                break
+
+        for state in plan:
+            for atom in state:
+                print(pretify(str(atom))),
+            print('\n')
         print('\n')
 
         

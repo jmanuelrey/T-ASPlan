@@ -7,6 +7,7 @@ from memory_profiler import memory_usage
 from TFG.src.main.model.util.searchutils import expand
 from TFG.src.main.model.util.atomutils import decorate_action
 from TFG.src.main.model.util.atomutils import print_solution
+from TFG.src.main.model.util.atomutils import print_solution_states
 
            
 class GraphSearch:
@@ -18,7 +19,7 @@ class GraphSearch:
         
     """ Searches for a plan """   
 
-    def search(self, initial, fringe, actions, fluents, use_heuristic, bfs):
+    def search(self, initial, fringe, actions, fluents, use_heuristic, bfs, print_states):
         """ Fringe: data structure for storing search nodes """
         fringe = fringe
         """ Maximum number of nodes in the fringe """
@@ -64,25 +65,29 @@ class GraphSearch:
                 end = time.time()
                 """ The amount of memory usage in MB """
                 memory = memory_usage()
-                print('SATISFIABLE')
-                print('Solution found: ')
-                for element in node.state:
-                    if element != (clingo.Function(str(goal))):
-                        print(clingo.Function(decorate_action(str(element)))) ,
-                print('')
-                print('Execution time: ') ,
-                print(end - start) ,
-                print('s')
-                print('Memory usage: ') ,
-                print(memory[0]) ,
-                print('MB')
-                print('Explored states: ') ,
-                print(explored)
-                print('Maximum number of nodes stored: ') ,
-                print(max_size) 
-                print('Obtained plan: ') ,
-                print_solution(node)
-                return 1
+                if print_states == False:
+                    print('SATISFIABLE')
+                    print('Solution found: ')
+                    for element in node.state:
+                        if element != (clingo.Function(str(goal))):
+                            print(clingo.Function(decorate_action(str(element)))) ,
+                    print('')
+                    print('Execution time: ') ,
+                    print(end - start) ,
+                    print('s')
+                    print('Memory usage: ') ,
+                    print(memory[0]) ,
+                    print('MB')
+                    print('Explored states: ') ,
+                    print(explored)
+                    print('Maximum number of nodes stored: ') ,
+                    print(max_size) 
+                    print('Obtained plan: ') 
+                    print_solution(node)
+                    return 1
+                else:
+                    print_solution_states(node)
+                    return 1
             """ If it is not a solution, then we have to store it in closed """
             if frozenset(node.state) not in closed:
                 closed.add(frozenset(node.state))

@@ -20,6 +20,7 @@ def main():
     fringe = FifoQueue()
     bfs = "astar"
     use_heuristic = False
+    states = False
     
     if len(sys.argv) == 2:
         param1 = sys.argv[1]
@@ -33,7 +34,9 @@ def main():
     if len(sys.argv) == 3:
         param1 = sys.argv[1]
         param2 = sys.argv[2]
-        if param2 == "-h":
+        if param2 == "-v":
+            states = True
+        elif param2 == "-h":
             use_heuristic = True
         elif param2 == "-all":
             search_algorithm = CompleteGraphSearch()
@@ -60,6 +63,8 @@ def main():
             use_heuristic = True
         elif param2 == "-all":
             search_algorithm = CompleteGraphSearch()   
+        elif param2 == "-v":
+            states = True
         else:
             print_error()
             print_help()
@@ -79,7 +84,7 @@ def main():
             print_help()
             return 
         
-    plan = solver.Solver(param1,search_algorithm,fringe,use_heuristic,bfs)
+    plan = solver.Solver(param1,search_algorithm,fringe,use_heuristic,bfs,states)
     try:
         plan.solve()
     except RuntimeError:

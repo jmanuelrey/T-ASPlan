@@ -7,12 +7,13 @@ import TFG.src.main.model.util.atomutils
 
 
 class Solver():
-    def __init__(self, file_name, search_algorithm, fringe, heuristic, bfs):
+    def __init__(self, file_name, search_algorithm, fringe, heuristic, bfs, states):
         self.file_name = file_name
         self.fringe = fringe
         self.search_algorithm = search_algorithm
         self.heuristic = heuristic
         self.bfs = bfs
+        self.states = states
     
     def solve(self):
         """ Creating the program object """
@@ -75,5 +76,5 @@ class Solver():
         
         """ Delegates to its search algorithm """
         self.search_algorithm.add_domain(program_dynamic)
-        self.search_algorithm.search(initial_states[0],self.fringe,action_list,fluent_list, self.heuristic, self.bfs)
+        self.search_algorithm.search(initial_states[0],self.fringe,action_list,fluent_list, self.heuristic, self.bfs, self.states)
 

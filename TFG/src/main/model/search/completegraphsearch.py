@@ -19,7 +19,7 @@ class CompleteGraphSearch:
                     
     """ Searches for ALL possible plans """              
 
-    def search(self, initial, fringe, actions, fluents, use_heuristic, bfs):
+    def search(self, initial, fringe, actions, fluents, use_heuristic, bfs, print_states):
         """ Fringe: data structure for storing search nodes """
         fringe = fringe
         """ Maximum number of nodes in the fringe """
@@ -28,6 +28,7 @@ class CompleteGraphSearch:
         explored = 0
         """ Set of visited nodes """
         closed = set()
+        closed2 = set()
         """ Node which stores the initial state """
         root_node = SearchNode(initial, None, [], 0, 0, 0)
         fringe.push(root_node)
@@ -63,40 +64,55 @@ class CompleteGraphSearch:
                     print(max_size) 
                     return 0
                 else:
-                    print('SATISFIABLE')
-                    print('Solution found: ')
-                    for element in goal_nodes[0].state:
-                        if element != (clingo.Function(str(goal))):
-                            print(clingo.Function(decorate_action(str(element)))) ,
-                    print('')
-                    print('Execution time: ') ,
-                    print(end - start) ,
-                    print('s')
-                    print('Memory usage: ') ,
-                    print(memory[0]) ,
-                    print('MB')
-                    print('Explored states: ') ,
-                    print(explored)
-                    print('Maximum number of nodes stored: ') ,
-                    print(max_size) 
-                    i = 1
-                    for node in goal_nodes:
-                        print('Plan ' + str(i) + ': ') ,
-                        print_solution(node)
-                        i += 1
-                    return 1
+                    if print_states == False:
+                        print('SATISFIABLE')
+                        print('Solution found: ')
+                        for element in goal_nodes[0].state:
+                            if element != (clingo.Function(str(goal))):
+                                print(clingo.Function(decorate_action(str(element)))) ,
+                        print('')
+                        print('Execution time: ') ,
+                        print(end - start) ,
+                        print('s')
+                        print('Memory usage: ') ,
+                        print(memory[0]) ,
+                        print('MB')
+                        print('Explored states: ') ,
+                        print(explored)
+                        print('Maximum number of nodes stored: ') ,
+                        print(max_size) 
+                        i = 1
+                        for node in goal_nodes:
+                            print('Plan ' + str(i) + ': ') 
+                            print_solution(node)
+                            i += 1
+                        return 1
+                    else:
+                        for node in goal_nodes:
+                            print_solution_states(node)
+                        return 1
             
             """ Recover fringe's first node """
             node = fringe.pop()
             """ We check if the recovered node is a posible solution """
             if (clingo.Function(str(goal))) in frozenset(node.state):
-                if min_sol_size == 0:
-                    min_sol_size = get_solution_size(node)
-                if get_solution_size(node) == min_sol_size:
-                    goal_nodes.append(node)
+                goal_nodes.append(node)
             """ If it is not a solution, then we have to store it in closed """
             if frozenset(node.state) not in closed:
                 closed.add(frozenset(node.state))
                 explored = explored + 1
+                print('Explored'),
+                print(node.state)
+                print('Expanded')
                 for child in expand(self.domain, node, actions, fluents, use_heuristic, bfs):
+                    print(child.state)
+                    fringe.push(child)
+            elif frozenset(node.state) not in closed2:
+                closed2.add(frozenset(node.state))
+                explored = explored + 1
+                print('Explored'),
+                print(node.state)
+                print('Expanded')
+                for child in expand(self.domain, node, actions, fluents, use_heuristic, bfs):
+                    print(child.state)
                     fringe.push(child)
