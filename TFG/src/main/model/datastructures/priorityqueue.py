@@ -1,6 +1,6 @@
 #AUTHOR: Juan Manuel Rey Escobar
 import heapq 
-from fringe import Fringe
+from TFG.src.main.model.datastructures.fringe import Fringe
 
 class PriorityQueue(Fringe):
     def __init__(self):

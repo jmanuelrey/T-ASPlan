@@ -1,5 +1,5 @@
 #AUTHOR: Juan Manuel Rey Escobar
-from fringe import Fringe
+from TFG.src.main.model.datastructures.fringe import Fringe
 
 class LifoQueue(Fringe):
     def __init__(self):
