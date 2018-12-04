@@ -11,8 +11,6 @@ from TFG.src.main.model.search.completegraphsearch import CompleteGraphSearch
 from TFG.src.main.model.util.mainutils import print_help
 from TFG.src.main.model.util.mainutils import print_version
 from TFG.src.main.model.util.mainutils import print_error
-from asynchat import fifo
-from binstar_client.commands.search import search
 
 
 def main():
