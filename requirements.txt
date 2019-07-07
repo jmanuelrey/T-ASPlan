@@ -1,2 +1,2 @@
-memory-profiler==5.4.8
+memory-profiler
 pyio==0.1.1

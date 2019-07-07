@@ -1,12 +1,10 @@
 # AUTHOR: Juan Manuel Rey Escobar
 
-from _pyio import __metaclass__
 from abc import ABCMeta
 from abc import abstractmethod
 
-class Fringe(object):
-    __metaclass__ = ABCMeta
-    
+class Fringe(object, metaclass= ABCMeta):
+
     """ Pushes an element to the fringe """
     @abstractmethod
     def push(self, element):

@@ -1,10 +1,9 @@
 *~
-
-# Eclipse specific gitignore
 *.metadata
 *.project
 *.pydevproject
 *.pyc
 *.egg
 *.egg-info
-
+.idea*
+env*/
